@@ -123,23 +123,46 @@ st.subheader("🧠 Model Performance on Full Dataset")
 
 col3, col4 = st.columns(2)
 
+# AI Confusion Matrix
+cm_ai = confusion_matrix(df['failure'], df['ai_prediction'])
+cm_ai_df = pd.DataFrame(
+    cm_ai,
+    index=["Actual: No Failure", "Actual: Failure"],
+    columns=["Predicted: No Failure", "Predicted: Failure"]
+)
+
+# Threshold Confusion Matrix
+cm_thresh = confusion_matrix(df['failure'], df['threshold_alert'])
+cm_thresh_df = pd.DataFrame(
+    cm_thresh,
+    index=["Actual: No Failure", "Actual: Failure"],
+    columns=["Predicted: No Failure", "Predicted: Failure"]
+)
+
 with col3:
-    st.markdown("**AI Confusion Matrix**")
-    cm_ai = confusion_matrix(df['failure'], df['ai_prediction'])
-    st.text(cm_ai)
+    st.markdown("### 🤖 AI Confusion Matrix")
+    st.table(cm_ai_df)
+
+    fig_ai, ax_ai = plt.subplots()
+    sns.heatmap(cm_ai_df, annot=True, fmt="d", cmap="Blues", cbar=False, ax=ax_ai)
+    ax_ai.set_title("AI Prediction Heatmap")
+    st.pyplot(fig_ai)
+
+    # AI Metrics
+    st.markdown("**AI Performance Metrics**")
+    st.write(f"Precision: {precision_score(df['failure'], df['ai_prediction']):.2f}")
+    st.write(f"Recall: {recall_score(df['failure'], df['ai_prediction']):.2f}")
+    st.write(f"F1-Score: {f1_score(df['failure'], df['ai_prediction']):.2f}")
 
 with col4:
-    st.markdown("**Threshold Confusion Matrix**")
-    cm_thresh = confusion_matrix(df['failure'], df['threshold_alert'])
-    st.text(cm_thresh)
+    st.markdown("### 🧾 Threshold Confusion Matrix")
+    st.table(cm_thresh_df)
+
+    fig_thresh, ax_thresh = plt.subplots()
+    sns.heatmap(cm_thresh_df, annot=True, fmt="d", cmap="Oranges", cbar=False, ax=ax_thresh)
+    ax_thresh.set_title("Threshold Alert Heatmap")
+    st.pyplot(fig_thresh)
 
 # Optional: Show data
 with st.expander("📈 Show Sample Data"):
     st.dataframe(df[['vibration', 'temperature', 'current', 'failure', 'threshold_alert', 'ai_prediction']].head(20))
-
-
-# In[ ]:
-
-
-
-
