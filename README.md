@@ -36,16 +36,6 @@ streamlit run predictive_dashboard.py
 
 ---
 
-## 📸 Screenshots
-
-| AI Prediction | Threshold Alert |
-|---------------|-----------------|
-| ![AI Prediction](docs/ai_pred.png) | ![Threshold](docs/threshold_pred.png) |
-
-*(You can add actual screenshots later)*
-
----
-
 ## 💡 Why AI?
 
 While thresholds work well in simple cases, they:
@@ -65,6 +55,8 @@ AI learns subtle relationships and adapts over time for earlier, smarter predict
 ---
 
 ## 🧠 Author
+
+Akinyemi Arabambi
 
 Demo built for showcasing AI potential in predictive maintenance at **Magna Confectionery**.
 
