@@ -23,7 +23,7 @@ from sklearn.metrics import (
 
 st.set_page_config(page_title="Predictive Maintenance Dashboard", layout="centered")
 
-st.title("⚙️ Predictive Maintenance: AI vs Threshold Alerts")
+st.title("Predictive Maintenance: AI vs Threshold Alerts")
 st.markdown("""
 This demo compares traditional **threshold-based alerts** with an **AI model** for detecting machine failure.
 """)
@@ -112,16 +112,16 @@ col1, col2 = st.columns(2)
 with col1:
     st.markdown("**AI Prediction**")
     if ai_pred == 1:
-        st.error(f"⚠️ AI says: Failure likely ({ai_proba:.2%} risk)")
+        st.error(f"AI says: Failure likely ({ai_proba:.2%} risk)")
     else:
-        st.success(f"✅ AI says: Machine is fine ({1 - ai_proba:.2%} confidence)")
+        st.success(f"AI says: Machine is fine ({1 - ai_proba:.2%} confidence)")
 
 with col2:
     st.markdown("**Threshold Alert**")
     if threshold_pred == 1:
-        st.warning("⚠️ Threshold crossed – manual alert triggered")
+        st.warning(" Threshold crossed – manual alert triggered")
     else:
-        st.success("✅ No threshold breached")
+        st.success("No threshold breached")
 
 # -----------------------------
 # Step 5: Show Dataset Insights
@@ -170,6 +170,6 @@ with col4:
     ax_thresh.set_title("Threshold Alert Heatmap")
     st.pyplot(fig_thresh)
 
-# Optional: Show data
-with st.expander("📈 Show Sample Data"):
+# Show data
+with st.expander("Show Sample Data"):
     st.dataframe(df[['vibration', 'temperature', 'current', 'failure', 'threshold_alert', 'ai_prediction']].head(20))
